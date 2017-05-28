@@ -1,0 +1,4 @@
+main: Image.cpp Image.h main.cpp macros.h 
+	/usr/local/cuda/bin/nvcc -O3 main.cpp Image.cpp main -lpng -ljpeg -L. -lcutil
+clean: 
+	rm main main.o
