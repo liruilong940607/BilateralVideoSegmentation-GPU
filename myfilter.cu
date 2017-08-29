@@ -239,25 +239,25 @@ void graphcut(float* unary, float* pairwise, int *gridsize, float* VerticsValue)
 							int idxVertic = rr*dims[0]+gg*dims[1]+bb*dims[2]+
 								x*dims[3]+y*dims[4]+t*dims[5];
 							if (VerticsValue[idxVertic]){	
-								// edge_count++;			
-								// g->add_edge( coarseIdx2Idx[idxVertic], coarseIdx2Idx[idxVertic+dims[0]], 
-								// 	pairwiseWeight * pairwise[idxVertic*6 + 0], 
-								// 	pairwiseWeight * pairwise[idxVertic*6 + 0] );
-								// g->add_edge( coarseIdx2Idx[idxVertic], coarseIdx2Idx[idxVertic+dims[1]], 
-								// 	pairwiseWeight * pairwise[idxVertic*6 + 1], 
-								// 	pairwiseWeight * pairwise[idxVertic*6 + 1] );
-								// g->add_edge( coarseIdx2Idx[idxVertic], coarseIdx2Idx[idxVertic+dims[2]], 
-								// 	pairwiseWeight * pairwise[idxVertic*6 + 2], 
-								// 	pairwiseWeight * pairwise[idxVertic*6 + 2] );
-								// g->add_edge( coarseIdx2Idx[idxVertic], coarseIdx2Idx[idxVertic+dims[3]], 
-								// 	pairwiseWeight * pairwise[idxVertic*6 + 3], 
-								// 	pairwiseWeight * pairwise[idxVertic*6 + 3] );
-								// g->add_edge( coarseIdx2Idx[idxVertic], coarseIdx2Idx[idxVertic+dims[4]], 
-								// 	pairwiseWeight * pairwise[idxVertic*6 + 4], 
-								// 	pairwiseWeight * pairwise[idxVertic*6 + 4] );
-								// g->add_edge( coarseIdx2Idx[idxVertic], coarseIdx2Idx[idxVertic+dims[5]], 
-								// 	pairwiseWeight * pairwise[idxVertic*6 + 5], 
-								// 	pairwiseWeight * pairwise[idxVertic*6 + 5] );
+								edge_count++;			
+								g->add_edge( coarseIdx2Idx[idxVertic], coarseIdx2Idx[idxVertic+dims[0]], 
+									pairwiseWeight * pairwise[idxVertic*6 + 0], 
+									pairwiseWeight * pairwise[idxVertic*6 + 0] );
+								g->add_edge( coarseIdx2Idx[idxVertic], coarseIdx2Idx[idxVertic+dims[1]], 
+									pairwiseWeight * pairwise[idxVertic*6 + 1], 
+									pairwiseWeight * pairwise[idxVertic*6 + 1] );
+								g->add_edge( coarseIdx2Idx[idxVertic], coarseIdx2Idx[idxVertic+dims[2]], 
+									pairwiseWeight * pairwise[idxVertic*6 + 2], 
+									pairwiseWeight * pairwise[idxVertic*6 + 2] );
+								g->add_edge( coarseIdx2Idx[idxVertic], coarseIdx2Idx[idxVertic+dims[3]], 
+									pairwiseWeight * pairwise[idxVertic*6 + 3], 
+									pairwiseWeight * pairwise[idxVertic*6 + 3] );
+								g->add_edge( coarseIdx2Idx[idxVertic], coarseIdx2Idx[idxVertic+dims[4]], 
+									pairwiseWeight * pairwise[idxVertic*6 + 4], 
+									pairwiseWeight * pairwise[idxVertic*6 + 4] );
+								g->add_edge( coarseIdx2Idx[idxVertic], coarseIdx2Idx[idxVertic+dims[5]], 
+									pairwiseWeight * pairwise[idxVertic*6 + 5], 
+									pairwiseWeight * pairwise[idxVertic*6 + 5] );
 							}
 						}
 					}
@@ -347,8 +347,8 @@ void filter_(float *out, float *im, float *ref, int f, int w, int h, bool accura
 	//------------------------ check ----------------------
     VerticsValue.deviceToHost();
     checkMinMax(VerticsValue.host,nVertics,"VerticsValue");
-    int idxVertic = (32-1)*mydims[0]+(14-1)*mydims[1]+(13-1)*mydims[2];
-    printf("[first point]: VerticsValue: %f\n", VerticsValue.host[idxVertic]);
+    //int idxVertic = (32-1)*mydims[0]+(14-1)*mydims[1]+(13-1)*mydims[2];
+    //printf("[first point]: VerticsValue: %f\n", VerticsValue.host[idxVertic]);
     VerticsValue.hostToDevice();
     //-----------------------------------------------------
 

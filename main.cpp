@@ -127,7 +127,7 @@ int main(int argc, char **argv){
 	myfile_p.close();
 
 	//========= params  ==============
-	int gridsize[] = {35, 15, 15, 20, 20, 5};//35
+	int gridsize[] = {10, 10, 10, 5, 5, 2};//35, 15, 15, 20, 20, 5
 
     float *positions = new float[inputs.frames*inputs.width*inputs.height*6];
     float *pPtr = positions;
