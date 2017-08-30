@@ -1,14 +1,13 @@
-main: Image.cpp Image.h main.cpp macros.h myfilter.o graph.o maxflow.o
-	/usr/local/cuda/bin/nvcc -O3 main.cpp Image.cpp myfilter.o graph.o maxflow.o -o main -lpng -ljpeg -L. -lcutil -I./Graphcut
+INCS = `pkg-config --cflags opencv`
+LIBS = `pkg-config --libs opencv`
+SRCS = main.cpp 
+OBJS = $(SRCS:.cpp=.o)
 
-myfilter.o: myfilter.cu graph.h
-	/usr/local/cuda/bin/nvcc -arch=sm_50  -c myfilter.cu -o myfilter.o 
+all: $(OBJS)
+	g++ -o BilateralVideoSegmentation $(OBJS) $(LIBS)
 
-maxflow.o: maxflow.cpp graph.h block.h instances.inc
-	g++ -c maxflow.cpp
-	
-graph.o: graph.cpp graph.h block.h instances.inc
-	g++ -c graph.cpp
+%.o: %.cpp
+	g++ -o $@ -c $< $(INCS)
 
-clean: 
-	rm main *.o
+clean:
+	rm *.o **/*.o
