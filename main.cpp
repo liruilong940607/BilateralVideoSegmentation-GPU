@@ -6,12 +6,17 @@
 #include <stdlib.h>
 #include <math.h>
 #include "arrayptr2mat.h"
+#include "bilateralSpace.h"
 using namespace cv;
 using namespace std;
 
 #define GET_ARRAY_LEN(array,len){len = (sizeof(array) / sizeof(array[0]));}
 
 int DEBUG=1;
+
+void splat(float *splattedData, float *bilateralData, float *bilateralVals, vector<int> gridSize){
+    
+}
 
 void lift(float *bilateralData, vector<Mat> vid, vector<int> gridSize, vector<int> Frames){
     int h = vid[0].rows;
@@ -90,7 +95,17 @@ vector<Mat> bilateralSpaceSegmentation(vector<Mat> vid, vector<Mat> mask, vector
     lift(bilateralData, vid, gridSize, Frames);
     lift(bilateralMask, vidmask, gridSize, maskFrames);
     // splatting
-
+    //int nClasses = 2;
+    //int nPotentialVertices = 1;
+    //for (int i = 0; i<gridSize.size(), i++){
+    //    nPotentialVertices *= gridSize[i];
+    //}
+    //float *splattedData = new float[nPotentialVertices*nClasses];
+    //float *bilateralValues = new float[f*w*h];
+    //float *maskValues = new float[fmask*w*h*2];
+    //for (int i = 0; i<f*w*h; i++)
+    //    bilateralValues[i] = 1.0;
+    //for (int i = 0; i<f)
 
     delete bilateralMask;
     delete bilateralData;
@@ -178,7 +193,7 @@ int main(int argc,char* argv[]){
         }
         cout<<endl;
     }
-    
+    run();
     vector<Mat> segmentation = bilateralSpaceSegmentation(vid,mask,maskFrames,gridSize,dimensionWeights,unaryWeight,pairwiseWeight);
 
     Mat img;
