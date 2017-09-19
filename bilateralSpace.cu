@@ -1,4 +1,11 @@
-#include "bilateralSpace.h"
+#define _DEBUG
+#include "cutil.h"
+#include <cuda_runtime.h>
+#include <stdio.h>
+#include "cuda_memory.h"
+#include <sys/time.h>
+
+#include "MirroredArray.h"
 #define DATA_SIZE 1048576
 
 int data[DATA_SIZE];
@@ -19,16 +26,12 @@ __global__ static void sumOfSquares(int *num, int* result)
 }
 void run(){
     GenerateNumbers(data, DATA_SIZE);
-    int* gpudata, *result;
-    cudaMalloc((void**) &gpudata, sizeof(int) * DATA_SIZE);
-    cudaMalloc((void**) &result, sizeof(int));
-    cudaMemcpy(gpudata, data, sizeof(int) * DATA_SIZE,
-            cudaMemcpyHostToDevice);
-    sumOfSquares<<<1, 1, 0>>>(gpudata, result);
-    int sum;
-    cudaMemcpy(&sum, result, sizeof(int), cudaMemcpyDeviceToHost);
-    cudaFree(gpudata);
-    cudaFree(result);
+    
+    MirroredArray<int> data_mirror(data, DATA_SIZE);
+    MirroredArray<int> result_mirror(1);
 
-    printf("sum: %d/n", sum);
+    sumOfSquares<<<1, 1, 0>>>(data_mirror.device, result_mirror.device);
+    result_mirror.deviceToHost();
+
+    printf("sum: %d/n", result_mirror.host);
 }

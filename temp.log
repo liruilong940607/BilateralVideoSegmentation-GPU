@@ -1,0 +1,31 @@
+main start
+./data/test2_small/frames/00191.png
+./data/test2_small/frames/00192.png
+./data/test2_small/frames/00193.png
+./data/test2_small/frames/00194.png
+./data/test2_small/frames/00195.png
+./data/test2_small/frames/00196.png
+./data/test2_small/frames/00197.png
+./data/test2_small/frames/00198.png
+./data/test2_small/frames/00199.png
+[TotalFrameNumber in video]: 9
+[LoadFrameNumber of video]: 9
+[LoadFrameSize]: 270 rows; 155 cols.
+[mask Size]:5
+[maskFrames]: 4 5 6 7 8 
+sum: 36422384/n[In bilateralSpaceSegmention()]
+[In lift()] h = 270 w = 155 f = 9
+[check Bounds]: lBounds: 1.996000 uBounds: 222.003998
+[check Bounds]: lBounds: -0.004000 uBounds: 221.003998
+[check Bounds]: lBounds: 1.996000 uBounds: 223.003998
+[check Bounds]: lBounds: -0.004000 uBounds: 154.003998
+[check Bounds]: lBounds: -0.004000 uBounds: 269.003998
+[check Bounds]: lBounds: -0.004000 uBounds: 8.004000
+[In lift()] h = 270 w = 155 f = 5
+[check Bounds]: lBounds: 1.996000 uBounds: 222.003998
+[check Bounds]: lBounds: -0.004000 uBounds: 221.003998
+[check Bounds]: lBounds: 1.996000 uBounds: 223.003998
+[check Bounds]: lBounds: -0.004000 uBounds: 154.003998
+[check Bounds]: lBounds: -0.004000 uBounds: 269.003998
+[check Bounds]: lBounds: 3.996000 uBounds: 8.004000
+[Out bilateralSpaceSegmention()]
