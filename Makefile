@@ -9,8 +9,8 @@ LIBS = -L$(MATLAB_PATH)/bin/glnxa64/ -lmat -lmx -lmex -leng `pkg-config --libs o
 SRCS = main.cpp arrayptr2mat.cpp
 OBJS = $(SRCS:.cpp=.o)
 
-all: main.cpp  arrayptr2mat.o  bilateralSpace.o
-	/usr/local/cuda/bin/nvcc -O3 main.cpp -o BilateralVideoSegmentation arrayptr2mat.o bilateralSpace.o $(INCS) $(LIBS)
+all: main.cpp  arrayptr2mat.o  bilateralSpace.o graph.o maxflow.o
+	/usr/local/cuda/bin/nvcc -O3 main.cpp -o BilateralVideoSegmentation arrayptr2mat.o bilateralSpace.o graph.o maxflow.o $(INCS) $(LIBS) -L. -lcutil -I./Graphcut
 
 arrayptr2mat.o: arrayptr2mat.cpp
 	g++ -o arrayptr2mat.o -c arrayptr2mat.cpp -I$(MATLAB_PATH)/extern/include
@@ -18,5 +18,11 @@ arrayptr2mat.o: arrayptr2mat.cpp
 bilateralSpace.o: bilateralSpace.cu bilateralSpace.h
 	/usr/local/cuda/bin/nvcc -arch=sm_50  -c bilateralSpace.cu -o bilateralSpace.o 
 
+maxflow.o: maxflow.cpp graph.h block.h instances.inc
+	g++ -c maxflow.cpp
+
+graph.o: graph.cpp graph.h block.h instances.inc
+	g++ -c graph.cpp
+
 clean:
-	rm *.o **/*.o
+	rm *.o BilateralVideoSegmentation

@@ -69,6 +69,20 @@ void lift(float *bilateralData, vector<Mat> vid, vector<int> gridSize, vector<in
     		bilateralData[i*6+j] = (value - lBounds[j])/(uBounds[j]-lBounds[j])*(gridSize[j]-1)+1;
     	}
     }
+    
+    printf("Calling filter...\n");
+    float *out = new float[f*w*h];
+    float *outPtr = out;
+    for (int t = 0; t < f*w*h; ++t){
+        *outPtr++ = 0.0f;
+    }
+
+    int gridsize[] = {10, 10, 10, 5, 5, 2};
+
+    filter(out,inputs(0, 0, 0),bilateralData, 6, 3, f, w, h, true, gridsize , preds(0, 0, 0));
+    printf("Saving output...\n");
+
+
     char out_file[100] = "temp/bilateralData.mat";
     int flag =  arrayptr2mat(bilateralData, f*w*h*6, 1, out_file);
 }
@@ -124,13 +138,13 @@ int main(int argc,char* argv[]){
         frameFns.push_back(string(tmp_file_name));
     }
     vector<string> maskFns;
-    for (int i = 195; i < 200; i++){
+    for (int i = 191; i < 200; i++){
         sprintf(tmp_file_name, "./data/test2_small/pred/%05d_pred.png", i);
         maskFns.push_back(string(tmp_file_name));
     }
 
     vector<int> maskFrames;
-    for (int i = 195; i< 200; i++){
+    for (int i = 191; i< 200; i++){
         maskFrames.push_back(i-191);
     }
     
@@ -193,7 +207,7 @@ int main(int argc,char* argv[]){
         }
         cout<<endl;
     }
-    run();
+    
     vector<Mat> segmentation = bilateralSpaceSegmentation(vid,mask,maskFrames,gridSize,dimensionWeights,unaryWeight,pairwiseWeight);
 
     Mat img;
